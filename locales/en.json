@@ -1,0 +1,9 @@
+{
+  "KEYBIND_OPEN": "Open the radial menu",
+  "RADIAL_INVENTORY": "Inventory",
+  "RADIAL_VEHICLE": "Vehicle",
+  "RADIAL_ENGINE": "Engine on / off",
+  "RADIAL_TRUNK": "Trunk",
+  "RADIAL_HOOD": "Hood",
+  "RADIAL_BACK": "Back"
+}
