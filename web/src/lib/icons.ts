@@ -1,103 +1,19 @@
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import {
-  faPeopleCarryBox,
-  faCarRear,
-  faSquareParking,
-  faGasPump,
-  faScrewdriverWrench,
-  faLock,
-  faKey,
-  faBox,
-  faBoxOpen,
-  faBriefcase,
-  faCamera,
-  faCar,
-  faCarSide,
-  faCircleDot,
-  faComments,
-  faFlask,
-  faEye,
-  faFloppyDisk,
-  faUtensils,
-  faHeartPulse,
-  faGear,
-  faGun,
-  faHammer,
-  faHandPointer,
-  faIdCard,
-  faList,
-  faLocationDot,
-  faMapLocationDot,
-  faMoneyBillWave,
-  faPalette,
-  faPeopleGroup,
-  faPlaneArrival,
-  faRankingStar,
-  faScaleBalanced,
-  faScissors,
-  faServer,
-  faShirt,
-  faSliders,
-  faKeyboard,
-  faStore,
-  faTableCells,
-  faTag,
-  faUser,
-  faUsers,
-  faWallet,
-  faWarehouse,
-  faBuildingColumns,
-} from "@fortawesome/free-solid-svg-icons";
+import { fas, faCircleDot } from "@fortawesome/free-solid-svg-icons";
 
-/** Icons a schema may name (Font Awesome solid, without `fa-`); add a name here when a schema uses a new one. */
-const ICONS: Record<string, IconDefinition> = {
-  "building-columns": faBuildingColumns,
-  "car-rear": faCarRear,
-  "square-parking": faSquareParking,
-  "gas-pump": faGasPump,
-  "screwdriver-wrench": faScrewdriverWrench,
-  lock: faLock,
-  key: faKey,
-  eye: faEye,
-  utensils: faUtensils,
-  "heart-pulse": faHeartPulse,
-  box: faBox,
-  "box-open": faBoxOpen,
-  "table-cells": faTableCells,
-  "hand-pointer": faHandPointer,
-  gun: faGun,
-  list: faList,
-  warehouse: faWarehouse,
-  hammer: faHammer,
-  flask: faFlask,
-  user: faUser,
-  car: faCar,
-  "car-side": faCarSide,
-  briefcase: faBriefcase,
-  camera: faCamera,
-  comments: faComments,
-  "floppy-disk": faFloppyDisk,
-  gear: faGear,
-  "id-card": faIdCard,
-  "location-dot": faLocationDot,
-  "map-location-dot": faMapLocationDot,
-  "money-bill-wave": faMoneyBillWave,
-  palette: faPalette,
-  "people-group": faPeopleGroup,
-  "plane-arrival": faPlaneArrival,
-  "ranking-star": faRankingStar,
-  "scale-balanced": faScaleBalanced,
-  scissors: faScissors,
-  server: faServer,
-  shirt: faShirt,
-  sliders: faSliders,
-  keyboard: faKeyboard,
-  store: faStore,
-  tag: faTag,
-  users: faUsers,
-  wallet: faWallet,
-  "people-carry-box": faPeopleCarryBox,
-};
+/**
+ * Items come from any script with any Font Awesome solid name (`car`, `map-location-dot`), so the whole solid set is
+ * indexed once by name and alias (tgiann-radialmenu does the same).
+ */
+const byName = new Map<string, IconDefinition>();
+for (const definition of Object.values(fas) as IconDefinition[]) {
+  byName.set(definition.iconName, definition);
+  for (const alias of definition.icon[2])
+    if (typeof alias === "string") byName.set(alias, definition);
+}
 
 export const iconOf = (name: string): IconDefinition =>
-  ICONS[name] ?? faCircleDot;
+  byName.get(name.trim().toLowerCase()) ?? faCircleDot;
+
+const IMAGE = /^(https?:)?\/\//i;
+export const isImage = (icon: string): boolean => IMAGE.test(icon);

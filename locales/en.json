@@ -1,11 +1,17 @@
 {
   "KEYBIND_OPEN": "Open the radial menu",
+  "RADIAL_TITLE": "Radial menu",
   "RADIAL_INVENTORY": "Inventory",
   "RADIAL_VEHICLE": "Vehicle",
   "RADIAL_ENGINE": "Engine on / off",
   "RADIAL_TRUNK": "Trunk",
   "RADIAL_HOOD": "Hood",
   "RADIAL_BACK": "Back",
+  "RADIAL_CLOSE": "Close",
+  "RADIAL_PAGE": "Page {0} / {1}",
+  "RADIAL_PREV_PAGE": "Previous page",
+  "RADIAL_NEXT_PAGE": "Next page",
+  "RADIAL_UNAVAILABLE": "That is not available right now",
   "RADIAL_HUD": "HUD settings",
   "RADIAL_KEYS": "Keys",
   "HINT_RADIAL": "Menu"

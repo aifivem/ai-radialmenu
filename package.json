@@ -5,7 +5,7 @@
   "description": "Radial menu: built-in actions and items other scripts add",
   "license": "GPL-3.0-only",
   "author": {
-    "name": "ai-core"
+    "name": "TGIANN"
   },
   "repository": "github:TGIANN/ai-radialmenu",
   "type": "module",
@@ -39,6 +39,7 @@
     "typescript": "^6.0.3"
   },
   "fxProvide": [
-    "qb-radialmenu"
+    "qb-radialmenu",
+    "tgiann-radialmenu-target"
   ]
 }

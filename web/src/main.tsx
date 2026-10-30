@@ -2,7 +2,9 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { isEnvBrowser } from "fivem-nui-react";
 import { config } from "@fortawesome/fontawesome-svg-core";
+import { Provider } from "react-redux";
 import { App } from "./App";
+import { store } from "./store";
 import "./index.css";
 
 // The svg-core CSS is imported in @layer base (index.css); injected unlayered it would beat the size utilities.
@@ -17,7 +19,9 @@ const root = document.getElementById("root");
 if (root) {
   createRoot(root).render(
     <StrictMode>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </StrictMode>,
   );
 }

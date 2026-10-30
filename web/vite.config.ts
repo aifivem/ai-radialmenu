@@ -15,7 +15,8 @@ export default defineConfig({
   build: {
     emptyOutDir: true,
     outDir: "../dist/web",
-    chunkSizeWarningLimit: 1000,
+    // The whole Font Awesome solid set is bundled: items name any icon (lib/icons.ts).
+    chunkSizeWarningLimit: 1500,
   },
   server: {
     // The workspace root node_modules holds the hoisted packages (fonts): without it the preview falls back to a system font.
