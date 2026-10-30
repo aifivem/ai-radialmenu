@@ -1,4 +1,4 @@
-import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import type { IconDefinition } from "@fortawesome/fontawesome-svg-core"
 import {
   faCarRear,
   faSquareParking,
@@ -45,7 +45,7 @@ import {
   faWallet,
   faWarehouse,
   faBuildingColumns,
-} from "@fortawesome/free-solid-svg-icons";
+} from "@fortawesome/free-solid-svg-icons"
 
 /** Icons a schema may name (Font Awesome solid, without `fa-`); add a name here when a schema uses a new one. */
 const ICONS: Record<string, IconDefinition> = {
@@ -93,6 +93,7 @@ const ICONS: Record<string, IconDefinition> = {
   tag: faTag,
   users: faUsers,
   wallet: faWallet,
-};
+}
 
-export const iconOf = (name: string): IconDefinition => ICONS[name] ?? faCircleDot;
+export const iconOf = (name: string): IconDefinition =>
+  ICONS[name] ?? faCircleDot
