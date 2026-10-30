@@ -59,6 +59,14 @@ class Radial {
       onSelect: () => void core.OpenHudSettings(),
     });
     this.add({
+      id: "keys",
+      label: Locale("RADIAL_KEYS"),
+      icon: "keyboard",
+      resource: own,
+      // ai-core's keys screen: every key that does something, on a keyboard.
+      onSelect: () => core.OpenKeyboard(),
+    });
+    this.add({
       id: "vehicle",
       label: Locale("RADIAL_VEHICLE"),
       icon: "car",
@@ -176,6 +184,7 @@ const openKey = new Keybind({
   description: Locale("KEYBIND_OPEN"),
   defaultKey: "F3",
   hint: "always",
+  icon: "circle-nodes",
   onPressed: () => radial.show(),
 });
 

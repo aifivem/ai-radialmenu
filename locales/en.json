@@ -6,5 +6,6 @@
   "RADIAL_TRUNK": "Trunk",
   "RADIAL_HOOD": "Hood",
   "RADIAL_BACK": "Back",
-  "RADIAL_HUD": "HUD settings"
+  "RADIAL_HUD": "HUD settings",
+  "RADIAL_KEYS": "Keys"
 }
