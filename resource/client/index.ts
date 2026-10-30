@@ -185,6 +185,7 @@ const openKey = new Keybind({
   defaultKey: "F3",
   hint: "always",
   icon: "circle-nodes",
+  hintLabel: Locale("HINT_RADIAL"),
   onPressed: () => radial.show(),
 });
 

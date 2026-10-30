@@ -7,5 +7,6 @@
   "RADIAL_HOOD": "Hood",
   "RADIAL_BACK": "Back",
   "RADIAL_HUD": "HUD settings",
-  "RADIAL_KEYS": "Keys"
+  "RADIAL_KEYS": "Keys",
+  "HINT_RADIAL": "Menu"
 }
