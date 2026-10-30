@@ -170,7 +170,14 @@ export function App() {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center">
+    <div
+      className="fixed inset-0 flex items-center justify-center"
+      // A click anywhere but on a slice or the centre button closes the wheel.
+      onMouseDown={(e) => {
+        if (e.button === 0 && !(e.target as Element).closest("button"))
+          void fetchNui("close", undefined, OK);
+      }}
+    >
       {/* Soft circular darkening centred on the wheel (tgiann-emotes WheelGlow). */}
       <div className="pointer-events-none absolute inset-0 m-auto size-[120vh] animate-fade [background:radial-gradient(circle_closest-side,rgba(0,0,0,0.8)_0%,rgba(0,0,0,0.78)_35%,rgba(0,0,0,0.68)_47%,rgba(0,0,0,0.52)_60%,rgba(0,0,0,0.34)_72%,rgba(0,0,0,0.18)_85%,rgba(0,0,0,0.06)_93%,rgba(0,0,0,0)_100%)]" />
       <div className="relative flex flex-col items-center gap-[2vh]">

@@ -5,7 +5,7 @@ The radial wheel (F1): built-in items (inventory, vehicle engine / trunk / hood 
 ## Decisions
 
 - Items added by a resource keep its function reference and go away when that resource stops; ai-police adds its job menu while both run.
-- At most 12 slices at a level; items with a `when` show only when it holds (vehicle items).
+- At most 12 slices at a level; items with a `when` show only when it holds (vehicle items). Escape, the open key or a click outside the slices closes it.
 - No panel: nothing for an owner to tune (the key is rebindable in GTA's settings).
 
 ## Contracts
