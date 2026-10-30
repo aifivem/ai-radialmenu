@@ -16,4 +16,4 @@ export const MOCK_OPEN = {
     { id: "police", label: "Police menu", icon: "id-card" },
     { id: "lock", label: "Lock vehicle", icon: "lock" },
   ],
-}
+};

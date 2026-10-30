@@ -1,36 +1,36 @@
-import { useEffect, useRef, useState, type ReactNode } from "react"
-import { motion } from "motion/react"
-import { fetchNui, useNuiEvent } from "fivem-nui-react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faArrowLeft, faLayerGroup } from "@fortawesome/free-solid-svg-icons"
-import type { NuiMessage, RadialView } from "../../resource/common/radial"
-import { MOCK_OPEN } from "./dev/mock"
-import { iconOf } from "./lib/icons"
-import { CARD, wheelLayout, type Slot } from "./lib/layout"
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { motion } from "motion/react";
+import { fetchNui, useNuiEvent } from "fivem-nui-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faLayerGroup } from "@fortawesome/free-solid-svg-icons";
+import type { NuiMessage, RadialView } from "../../resource/common/radial";
+import { MOCK_OPEN } from "./dev/mock";
+import { iconOf } from "./lib/icons";
+import { CARD, wheelLayout, type Slot } from "./lib/layout";
 
-type OpenData = Extract<NuiMessage, { action: "open" }>["data"]
-const OPEN_MOCK = { mockData: MOCK_OPEN, mockDelay: 100 }
-const OK = { mockData: true }
+type OpenData = Extract<NuiMessage, { action: "open" }>["data"];
+const OPEN_MOCK = { mockData: MOCK_OPEN, mockDelay: 100 };
+const OK = { mockData: true };
 /** glide(0.25, 0) from tgiann-ui nui-performance: compositor tween. */
 const ENTER = {
   type: "tween",
   duration: 0.3,
   ease: [0.22, 0.189, 0.141, 1.034],
-} as const
+} as const;
 
 /** Centre disc (tgiann-emotes CenterIndicator); its green arc turns to the hovered card. */
 function CenterDisc({
   slot,
   children,
 }: {
-  slot: Slot | null
-  children: ReactNode
+  slot: Slot | null;
+  children: ReactNode;
 }) {
-  const angle = useRef(0)
+  const angle = useRef(0);
   if (slot) {
-    const target = (Math.atan2(slot.y, slot.x) * 180) / Math.PI
+    const target = (Math.atan2(slot.y, slot.x) * 180) / Math.PI;
     // Shortest turn from the last angle, so the arc never spins the long way round.
-    angle.current += ((((target - angle.current) % 360) + 540) % 360) - 180
+    angle.current += ((((target - angle.current) % 360) + 540) % 360) - 180;
   }
   return (
     <div className="absolute inset-0 m-auto size-[10vh] rounded-full border-[0.1vh] border-white/10 bg-[rgba(217,217,217,0.02)] [box-shadow:inset_0_0_3vh_1vh_rgba(0,0,0,0.2)]">
@@ -71,7 +71,7 @@ function CenterDisc({
       </svg>
       {children}
     </div>
-  )
+  );
 }
 
 /** One wheel card: label top left, big icon in the middle, a stack mark when it opens a sub wheel. */
@@ -83,12 +83,12 @@ function Card({
   onLeave,
   onPick,
 }: {
-  item: RadialView
-  slot: Slot
-  active: boolean
-  onEnter: () => void
-  onLeave: () => void
-  onPick: () => void
+  item: RadialView;
+  slot: Slot;
+  active: boolean;
+  onEnter: () => void;
+  onLeave: () => void;
+  onPick: () => void;
 }) {
   return (
     <button
@@ -125,49 +125,49 @@ function Card({
         </span>
       ) : null}
     </button>
-  )
+  );
 }
 
 /** The wheel: cards in a ring around the centre disc; a card with children opens its sub wheel, the centre goes back. */
 export function App() {
-  const [data, setData] = useState<OpenData | null>(null)
-  const [path, setPath] = useState<string[]>([])
-  const [hover, setHover] = useState<number | null>(null)
+  const [data, setData] = useState<OpenData | null>(null);
+  const [path, setPath] = useState<string[]>([]);
+  const [hover, setHover] = useState<number | null>(null);
 
   useNuiEvent<OpenData>(
     "open",
     (d) => {
-      setData(d)
-      setPath([])
+      setData(d);
+      setPath([]);
     },
-    OPEN_MOCK
-  )
-  useNuiEvent("close", () => setData(null))
+    OPEN_MOCK,
+  );
+  useNuiEvent("close", () => setData(null));
   useEffect(() => {
     // A held key repeats keydown: only a fresh press closes, or holding the open key closes and reopens the wheel.
     const onKey = (e: KeyboardEvent) =>
       !e.repeat &&
       (e.key === "Escape" || e.key === "F1") &&
       data &&
-      void fetchNui("close", undefined, OK)
-    window.addEventListener("keydown", onKey)
-    return () => window.removeEventListener("keydown", onKey)
-  }, [data])
+      void fetchNui("close", undefined, OK);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [data]);
 
-  if (!data) return null
-  let items: RadialView[] = data.items
-  let title = ""
+  if (!data) return null;
+  let items: RadialView[] = data.items;
+  let title = "";
   for (const id of path) {
-    const parent = items.find((i) => i.id === id)
-    title = parent?.label ?? ""
-    items = parent?.children ?? []
+    const parent = items.find((i) => i.id === id);
+    title = parent?.label ?? "";
+    items = parent?.children ?? [];
   }
-  const layout = wheelLayout(items.length)
+  const layout = wheelLayout(items.length);
   const pick = (item: RadialView) => {
-    setHover(null)
-    if (item.children?.length) setPath([...path, item.id])
-    else void fetchNui("select", { path: [...path, item.id] }, OK)
-  }
+    setHover(null);
+    if (item.children?.length) setPath([...path, item.id]);
+    else void fetchNui("select", { path: [...path, item.id] }, OK);
+  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center">
@@ -224,5 +224,5 @@ export function App() {
         </div>
       </div>
     </div>
-  )
+  );
 }
