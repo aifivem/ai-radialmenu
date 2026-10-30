@@ -82,7 +82,8 @@ export function App() {
   );
   useNuiEvent("close", () => setData(null));
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => (e.key === "Escape" || e.key === "F1") && data && void fetchNui("close", undefined, OK);
+    // A held key repeats keydown: only a fresh press closes, or holding the open key closes and reopens the wheel.
+    const onKey = (e: KeyboardEvent) => !e.repeat && (e.key === "Escape" || e.key === "F1") && data && void fetchNui("close", undefined, OK);
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [data]);

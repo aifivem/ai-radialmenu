@@ -1,4 +1,4 @@
-import { cache, Keybind, optionalExport, provideExport, registerExport } from "@aicore-fivem/lib/client";
+import { cache, inventory, Keybind, provideExport, registerExport } from "@aicore-fivem/lib/client";
 import { Locale } from "common";
 import type { NuiMessage, RadialView } from "common/radial";
 
@@ -28,10 +28,11 @@ const toggleDoor = (door: number) => {
 class Radial {
   private readonly items = new Map<string, Item>();
   private open = false;
+  private closedAt = 0;
 
   constructor() {
     const own = GetCurrentResourceName();
-    this.add({ id: "inventory", label: Locale("RADIAL_INVENTORY"), icon: "box-open", resource: own, onSelect: () => optionalExport("ai-inventory")?.OpenSelf() });
+    this.add({ id: "inventory", label: Locale("RADIAL_INVENTORY"), icon: "box-open", resource: own, onSelect: () => inventory.openInventory() });
     this.add({
       id: "vehicle",
       label: Locale("RADIAL_VEHICLE"),
@@ -67,7 +68,8 @@ class Radial {
   }
 
   show(): void {
-    if (this.open || IsPauseMenuActive() || IsNuiFocused() || IsEntityDead(cache.ped)) return;
+    // The key that closed the wheel in the NUI is still down when the game gets the focus back: no instant reopen.
+    if (this.open || GetGameTimer() - this.closedAt < 300 || IsPauseMenuActive() || IsNuiFocused() || IsEntityDead(cache.ped)) return;
     const items = this.visible(this.items.values()).slice(0, 12);
     if (items.length === 0) return;
     this.open = true;
@@ -79,6 +81,7 @@ class Radial {
   close(): void {
     if (!this.open) return;
     this.open = false;
+    this.closedAt = GetGameTimer();
     SetNuiFocus(false, false);
     send({ action: "close", data: null });
   }
@@ -96,7 +99,7 @@ class Radial {
 }
 
 const radial = new Radial();
-new Keybind({ name: "radialmenu_open_F1", description: Locale("KEYBIND_OPEN"), defaultKey: "F1", onPressed: () => radial.show() });
+new Keybind({ name: "radialmenu_open", description: Locale("KEYBIND_OPEN"), defaultKey: "F1", onPressed: () => radial.show() });
 
 type Reply = (r: unknown) => void;
 RegisterNuiCallback("select", (d: unknown, cb: Reply) => {
