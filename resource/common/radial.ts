@@ -11,5 +11,9 @@ export interface RadialView {
 
 /** Client -> NUI messages. */
 export type NuiMessage =
-  | { action: "open"; data: { items: RadialView[]; back: string } }
+  | {
+      action: "open";
+      /** `key`: the open key as bound now (the wheel closes on it too). */
+      data: { items: RadialView[]; back: string; key: string };
+    }
   | { action: "close"; data: null };

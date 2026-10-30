@@ -4,11 +4,13 @@ import {
   Keybind,
   provideExport,
   registerExport,
+  resourceExport,
 } from "@aicore-fivem/lib/client";
 import { Locale } from "common";
 import type { NuiMessage, RadialView } from "common/radial";
 
 const send = (m: NuiMessage): void => SendNUIMessage(m);
+const core = resourceExport("ai-core");
 const isObj = (v: unknown): v is Record<string, unknown> =>
   typeof v === "object" && v !== null;
 
@@ -46,6 +48,15 @@ class Radial {
       icon: "box-open",
       resource: own,
       onSelect: () => inventory.openInventory(),
+    });
+    this.add({
+      id: "hud",
+      label: Locale("RADIAL_HUD"),
+      icon: "sliders",
+      resource: own,
+      // Whatever HUD runs (ai-hud, tgiann-lumihud) opens its own settings through ai-core.
+      when: () => core.HasHudSettings(),
+      onSelect: () => void core.OpenHudSettings(),
     });
     this.add({
       id: "vehicle",
@@ -134,6 +145,7 @@ class Radial {
       data: {
         items: items.map((i) => this.view(i)),
         back: Locale("RADIAL_BACK"),
+        key: openKey.currentKey.toUpperCase(),
       },
     });
   }
@@ -159,10 +171,11 @@ class Radial {
 }
 
 const radial = new Radial();
-new Keybind({
+const openKey = new Keybind({
   name: "radialmenu_open",
   description: Locale("KEYBIND_OPEN"),
-  defaultKey: "F1",
+  defaultKey: "F3",
+  hint: "always",
   onPressed: () => radial.show(),
 });
 

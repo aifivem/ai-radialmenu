@@ -1,6 +1,6 @@
 # ai-radialmenu
 
-The radial wheel (F1): built-in items (inventory, vehicle engine / trunk / hood while driving) and items other resources add; one level of sub wheels. Client only. Stands in for `qb-radialmenu`'s `AddOption` / `RemoveOption`.
+The radial wheel (F3 by default; Escape or the bound key closes it): built-in items (inventory, vehicle engine / trunk / hood while driving) and items other resources add; one level of sub wheels. Client only. Stands in for `qb-radialmenu`'s `AddOption` / `RemoveOption`.
 
 ## Decisions
 

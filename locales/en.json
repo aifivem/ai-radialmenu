@@ -5,5 +5,6 @@
   "RADIAL_ENGINE": "Engine on / off",
   "RADIAL_TRUNK": "Trunk",
   "RADIAL_HOOD": "Hood",
-  "RADIAL_BACK": "Back"
+  "RADIAL_BACK": "Back",
+  "RADIAL_HUD": "HUD settings"
 }

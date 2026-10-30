@@ -147,7 +147,9 @@ export function App() {
     // A held key repeats keydown: only a fresh press closes, or holding the open key closes and reopens the wheel.
     const onKey = (e: KeyboardEvent) =>
       !e.repeat &&
-      (e.key === "Escape" || e.key === "F1") &&
+      (e.key === "Escape" ||
+        e.key.toUpperCase() === data?.key ||
+        e.code.toUpperCase() === data?.key) &&
       data &&
       void fetchNui("close", undefined, OK);
     window.addEventListener("keydown", onKey);

@@ -1,6 +1,7 @@
 /** Browser preview only (`bun run webdev`): the wheel with a vehicle sub wheel and a police item. */
 export const MOCK_OPEN = {
   back: "Back",
+  key: "F3",
   items: [
     { id: "inventory", label: "Inventory", icon: "box-open" },
     {
