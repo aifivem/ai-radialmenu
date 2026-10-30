@@ -12,6 +12,7 @@
   "RADIAL_PREV_PAGE": "Previous page",
   "RADIAL_NEXT_PAGE": "Next page",
   "RADIAL_UNAVAILABLE": "That is not available right now",
+  "RADIAL_ERR_NO_KEY": "You have no key for this vehicle",
   "RADIAL_HUD": "HUD settings",
   "RADIAL_KEYS": "Keys",
   "HINT_RADIAL": "Menu"

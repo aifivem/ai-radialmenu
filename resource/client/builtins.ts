@@ -1,4 +1,9 @@
-import { cache, inventory, resourceExport } from "@aicore-fivem/lib/client";
+import {
+  cache,
+  inventory,
+  notify,
+  resourceExport,
+} from "@aicore-fivem/lib/client";
 import { RADIAL_VEHICLE } from "@aicore-fivem/shared";
 import { Locale, ResourceName } from "common";
 import type { Item, MenuRegistry } from "./registry";
@@ -6,6 +11,18 @@ import type { Item, MenuRegistry } from "./registry";
 const core = resourceExport("ai-core");
 
 const driving = () => cache.vehicle !== false && cache.seat === -1;
+/** GTA's "this ped cannot start an engine" flag: key systems (ai-vehiclekeys) set it while the driver has no key. */
+const NO_ENGINE_START = 429;
+
+/** Engine off always; on only when nothing holds the engine off (no key: the key system's flag). */
+function toggleEngine(): void {
+  const vehicle = cache.vehicle;
+  if (vehicle === false) return;
+  const running = GetIsVehicleEngineRunning(vehicle);
+  if (!running && GetPedConfigFlag(cache.ped, NO_ENGINE_START, true))
+    return notify(Locale("RADIAL_ERR_NO_KEY"), "error", 2500);
+  SetVehicleEngineOn(vehicle, !running, false, true);
+}
 const toggleDoor = (door: number) => {
   if (cache.vehicle === false) return;
   if (GetVehicleDoorAngleRatio(cache.vehicle, door) > 0.1)
@@ -20,14 +37,7 @@ const vehicleItems: Item[] = [
     label: Locale("RADIAL_ENGINE"),
     icon: "key",
     canShow: driving,
-    onPressed: () =>
-      cache.vehicle !== false &&
-      SetVehicleEngineOn(
-        cache.vehicle,
-        !GetIsVehicleEngineRunning(cache.vehicle),
-        false,
-        true,
-      ),
+    onPressed: toggleEngine,
   },
   {
     id: "trunk",

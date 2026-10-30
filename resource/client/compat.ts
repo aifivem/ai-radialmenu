@@ -1,15 +1,16 @@
 import { callExport, isResourceStarted } from "@aicore-fivem/lib/client";
-import { createLogger, isRecord } from "@aicore-fivem/lib/shared";
+import { createLogger, isRecord, readText } from "@aicore-fivem/lib/shared";
 import type { Item } from "./registry";
 
 const log = createLogger("ai-radialmenu");
 const IMAGE = /^(https?:)?\/\//i;
+/** An optional text field of a third-party item (lib `readText`, missing = undefined). */
 const str = (v: unknown, max: number): string | undefined =>
-  typeof v === "string" && v.length > 0 ? v.slice(0, max) : undefined;
+  readText(v, max) ?? undefined;
 
 /** `fas fa-car`, `fa-solid fa-car`, `fa-car` -> `car`; image urls stay. */
 export function iconName(v: unknown): string {
-  const raw = str(v, 300)?.trim();
+  const raw = str(v, 300);
   if (!raw) return "circle";
   if (IMAGE.test(raw)) return raw;
   return (raw.split(/\s+/).pop() ?? raw).replace(/^fa-/, "");

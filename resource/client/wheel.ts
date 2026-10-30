@@ -21,6 +21,8 @@ export class Wheel {
   private closedAt = 0;
   /** NUI key -> item of the last build (categories included). */
   private readonly byKey = new Map<string, Item>();
+  /** Item ids on the path being built: an item that is its own parent or ancestor is skipped (no endless tree). */
+  private readonly path = new Set<string>();
 
   constructor(
     private readonly registry: MenuRegistry,
@@ -45,7 +47,7 @@ export class Wheel {
 
   /** A card, or null when hidden; a category without a visible sub item is hidden too. */
   private node(item: Item, key: string): RadialNode | null {
-    if (!this.visible(item)) return null;
+    if (this.path.has(item.id) || !this.visible(item)) return null;
     const state = this.registry.state(item.id);
     const node: RadialNode = {
       key,
@@ -56,7 +58,9 @@ export class Wheel {
     const sub = item.items ?? (item.menu && this.registry.subMenu(item.menu));
     const added = this.registry.childrenOf(item.id);
     if (!sub && added.length === 0) return item.menu ? null : node;
+    this.path.add(item.id);
     const items = this.level([...(sub || []), ...added], `${key}/`);
+    this.path.delete(item.id);
     if (items.length === 0) return null;
     node.items = items;
     return node;
@@ -76,6 +80,7 @@ export class Wheel {
 
   private tree(): RadialNode[] {
     this.byKey.clear();
+    this.path.clear();
     return this.level(this.registry.childrenOf(), "", this.dead());
   }
 
