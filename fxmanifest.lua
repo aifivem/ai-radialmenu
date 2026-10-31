@@ -1,6 +1,6 @@
 name 'ai-radialmenu'
 author 'TGIANN'
-version '0.1.0' -- x-release-please-version
+version '0.1.1' -- x-release-please-version
 license 'GPL-3.0-only'
 description 'Radial menu: built-in actions and items other scripts add'
 repository 'https://github.com/aifivem/ai-radialmenu'
