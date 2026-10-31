@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/aifivem/ai-radialmenu/compare/v0.1.1...v0.1.2) (2026-10-31)
+
+
+### Miscellaneous Chores
+
+* rebuild with the current lib ([8678e72](https://github.com/aifivem/ai-radialmenu/commit/8678e72f8f0ddf5f7c8eb14a2c473d38e9c03e94))
+
 ## [0.1.1](https://github.com/aifivem/ai-radialmenu/compare/v0.1.0...v0.1.1) (2026-10-31)
 
 
