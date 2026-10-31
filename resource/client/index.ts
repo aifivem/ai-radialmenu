@@ -6,6 +6,10 @@ import { addBuiltins } from "./builtins";
 import { registerExports } from "./exports";
 import { MenuRegistry } from "./registry";
 import { Wheel } from "./wheel";
+import { NUI_LAYER } from "@aicore-fivem/shared";
+
+// Stacking among NUI pages (`NUI_LAYER`): set at start, not left to load order.
+SetNuiZindex(NUI_LAYER.radial);
 
 const registry = new MenuRegistry();
 addBuiltins(registry);
