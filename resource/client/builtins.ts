@@ -1,5 +1,6 @@
 import {
   cache,
+  drivenVehicle,
   inventory,
   notify,
   resourceExport,
@@ -10,7 +11,7 @@ import type { Item, MenuRegistry } from "./registry";
 
 const core = resourceExport("ai-core");
 
-const driving = () => cache.vehicle !== false && cache.seat === -1;
+const driving = () => drivenVehicle() !== false;
 /** GTA's "this ped cannot start an engine" flag: key systems (ai-vehiclekeys) set it while the driver has no key. */
 const NO_ENGINE_START = 429;
 

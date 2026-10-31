@@ -1,18 +1,11 @@
-import {
-  cache,
-  notify,
-  PlayerState,
-  stateBoolean,
-} from "@aicore-fivem/lib/client";
+import { medical, notify } from "@aicore-fivem/lib/client";
 import { createLogger } from "@aicore-fivem/lib/shared";
-import { PLAYER_BAGS } from "@aicore-fivem/shared";
 import { Locale } from "common";
 import type { NuiMessage, RadialNode, RadialTexts } from "common/radial";
 import type { Item, MenuRegistry } from "./registry";
 
 const log = createLogger("ai-radialmenu");
 const send = (m: NuiMessage): void => SendNUIMessage(m);
-const downed = new PlayerState(PLAYER_BAGS.dead, stateBoolean);
 
 /** The open wheel: builds the visible tree from the registry, runs picks, keeps an open level on refresh. */
 export class Wheel {
@@ -30,7 +23,7 @@ export class Wheel {
   ) {}
 
   private dead(): boolean {
-    return downed.get(cache.serverId) === true || IsEntityDead(cache.ped);
+    return medical.isDead();
   }
 
   /** Hidden by a state, or its condition fails (a condition that throws hides the item). */
