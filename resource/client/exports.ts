@@ -1,11 +1,14 @@
-import { provideExport, registerExport } from "@aicore-fivem/lib/client";
+import {
+  caller,
+  provideExport,
+  registerExport,
+} from "@aicore-fivem/lib/client";
 import { isRecord } from "@aicore-fivem/lib/shared";
 import { iconName, toItem, toItems } from "./compat";
 import type { ItemState, MenuRegistry } from "./registry";
 import type { Wheel } from "./wheel";
 
 type Handler = (...args: unknown[]) => unknown;
-const caller = () => GetInvokingResource() ?? "";
 const id = (v: unknown) => (typeof v === "string" ? v : undefined);
 
 /**
