@@ -21,5 +21,5 @@ The radial wheel (F3 by default), modelled on tgiann-radialmenu-target's "circle
 
 ## Entry points
 
-- Client: `resource/client/index.ts` (keybind, NUI callbacks), `wheel.ts` (open wheel, tree build, picks), `builtins.ts`, `exports.ts`.
+- Client: `resource/client/radial.ts` (keybind, NUI callbacks), `wheel.ts` (open wheel, tree build, picks), `builtins.ts`, `exports.ts`.
 - NUI: `web/src/components/Wheel.tsx`, store `web/src/features/wheel.ts`; browser preview `bun run webdev` (mock: 12 items, a vehicle and a nested police category).
