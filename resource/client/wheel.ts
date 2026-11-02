@@ -1,5 +1,5 @@
-import { medical, notify } from "@aicore-fivem/lib/client";
-import { createLogger } from "@aicore-fivem/lib/shared";
+import { medical, notify } from "@aifivem/lib/client";
+import { createLogger } from "@aifivem/lib/shared";
 import { Locale } from "common";
 import type { NuiMessage, RadialNode, RadialTexts } from "common/radial";
 import type { Item, MenuRegistry } from "./registry";

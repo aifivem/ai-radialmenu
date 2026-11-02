@@ -4,8 +4,8 @@ import {
   inventory,
   notify,
   resourceExport,
-} from "@aicore-fivem/lib/client";
-import { RADIAL_VEHICLE } from "@aicore-fivem/shared";
+} from "@aifivem/lib/client";
+import { RADIAL_VEHICLE } from "@aifivem/shared";
 import { Locale, ResourceName } from "common";
 import type { Item, MenuRegistry } from "./registry";
 

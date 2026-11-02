@@ -1,12 +1,12 @@
-import { Keybind } from "@aicore-fivem/lib/client";
-import { isRecord } from "@aicore-fivem/lib/shared";
+import { Keybind } from "@aifivem/lib/client";
+import { isRecord } from "@aifivem/lib/shared";
 import { Locale, ResourceName } from "common";
 import { NUI } from "common/radial";
 import { addBuiltins } from "./builtins";
 import { registerExports } from "./exports";
 import { MenuRegistry } from "./registry";
 import { Wheel } from "./wheel";
-import { NUI_LAYER } from "@aicore-fivem/shared";
+import { NUI_LAYER } from "@aifivem/shared";
 
 // Stacking among NUI pages (`NUI_LAYER`): set at start, not left to load order.
 SetNuiZindex(NUI_LAYER.radial);
