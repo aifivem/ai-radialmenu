@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.5](https://github.com/aifivem/ai-radialmenu/compare/v0.1.4...v0.1.5) (2026-11-02)
+
+
+### Documentation
+
+* install from the release zip ([f3b0b94](https://github.com/aifivem/ai-radialmenu/commit/f3b0b943cb94581db7034c543145ee8410ae98db))
+
+
+### Miscellaneous Chores
+
+* build files are no longer in git, the release zip carries them ([8fbb2c1](https://github.com/aifivem/ai-radialmenu/commit/8fbb2c177a9d1141d23865cb325ff40186dabec1))
+
 ## [0.1.4](https://github.com/aifivem/ai-radialmenu/compare/v0.1.3...v0.1.4) (2026-11-02)
 
 
